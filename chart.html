@@ -83,7 +83,7 @@
         <script src="scripts/socket.io.min.js"></script>
         <script>
             const ctx = document.getElementById('myChart');
-            const socket = io('http://localhost:3000');
+            const socket = io('https://smansekata-quickcount.vercel.app/');
             const suara = document.getElementsByClassName('suara-kand');
             function $id(id) {return document.getElementById(id);}
             socket.on('connection', () => {
