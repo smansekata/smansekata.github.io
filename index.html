@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="scripts/tailwind.js"></script>
+</head>
+<body class="h-full m-0 p-0">
+        <nav>
+            <!-- <h1>JELLY</h1> -->
+        </nav>
+        <main>
+            <div class="flex justify-center items-center h-screen">
+    <button id="ps1"  class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      kandidat 1
+    </button>
+    <button id="ps2"  class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      kandidat 2
+    </button>
+    <button  id="ps3" class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      kandidat 3
+    </button>
+    <button  id="ps4" class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      kandidat 4
+    </button>
+    <button  id="ps5" class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      kandidat 5
+    </button>
+
+</div>
+    <script src="scripts/socket.io.min.js"></script>
+
+<script>
+    const socket = io('http://localhost:3000');
+    const kandidat = document.getElementsByClassName('kandidat');
+    function $id(id) {return document.getElementById(id);}
+    function $class(elem) {return document.getElementsByClassName(elem);}
+    function btnDisable(elem) {
+        Array.from($class(elem)).forEach(element => {
+            element.classList.remove('bg-blue-500')
+            element.classList.remove('hover:bg-blue-700')
+            element.classList.add('bg-blue-300')
+            element.disabled = true
+        });
+    }
+    function btnEnable(elem) {
+        Array.from($class(elem)).forEach(element => {
+            element.classList.add('bg-blue-500')
+            element.classList.add('hover:bg-blue-700')
+            element.classList.remove('bg-blue-300')
+            element.disabled = false
+        });
+    }
+    Array.from($class('vote')).forEach((btn, index) => {
+        btn.addEventListener('click', () => {
+            let data = [0,0,0,0,0]
+            data[index] = 1;
+            console.log(data);
+            btnDisable('vote');
+            socket.emit('vote', data);
+            setTimeout(() => {
+                btnEnable('vote');
+            }, 3000);
+        });
+    });
+    
+</script>
+
+        </main>
+
+    </body>
+</html>

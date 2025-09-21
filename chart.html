@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="scripts/tailwind.js"></script>
+</head>
+    <nav>
+        <!-- <h1>JELLY</h1> -->
+    </nav>
+    <body class="h-full m-0 p-0">
+        <main>
+            <div class="h-fit h-[80%] flex">
+                <canvas id="myChart" class="w-[70%] h-[80%]"></canvas>
+                <div class=" flex flex-col flex-1 p-6 justify-around">
+                    <div class="bg-neutral-100 rounded-lg flex items-center justify-between overflow-hidden">
+                        <div class="h-[70px] w-[70px] bg-cyan-600 shadow-lg/20 rounded-full overflow-hidden">
+                            <img src="./assets/kand1.png" class="transform -translate-y-2 scale-190 " srcset="">
+                        </div>
+                        <h1 class="font-semibold text-xs m-3 text-neutral-900 flex-1">Axl Fathir Ivory Warouw</h1>
+                        <div class="bg-stone-600 inset-shadow-sm h-full w-[80px] flex justify-center items-center">
+                            <p class="text-stone-50  text-xl suara-kand">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-100 rounded-lg flex items-center justify-between overflow-hidden">
+                        <div class="h-[70px] w-[70px] bg-cyan-600 shadow-lg/20 rounded-full overflow-hidden">
+                            <img src="./assets/kand2.png" class="transform -translate-y-4 translate-x-1 scale-210 " srcset="">
+                        </div>
+                        <h1 class="font-semibold text-xs m-3 text-neutral-900 flex-1">Lintang Pramoda Wardani Pastika</h1>
+                        <div class="bg-stone-600 inset-shadow-sm h-full w-[80px] flex justify-center items-center">
+                            <p class="text-stone-50  text-xl suara-kand">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-100 rounded-lg flex items-center justify-between overflow-hidden">
+                        <div class="h-[70px] w-[70px] bg-cyan-600 shadow-lg/20 rounded-full overflow-hidden">
+                            <img src="./assets/kand3.png" class="transform translate-y-1 scale-150 " srcset="">
+                        </div>
+                        <h1 class="font-semibold text-xs m-3 text-neutral-900 flex-1">Elisa Dwi Syafinah</h1>
+                        <div class="bg-stone-600 inset-shadow-sm h-full w-[80px] flex justify-center items-center">
+                            <p class="text-stone-50  text-xl suara-kand">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-100 rounded-lg flex items-center justify-between overflow-hidden">
+                        <div class="h-[70px] w-[70px] bg-cyan-600 shadow-lg/20 rounded-full overflow-hidden">
+                            <img src="./assets/kand4.png" class="transform -translate-y-2 scale-190 " srcset="">
+                        </div>
+                        <h1 class="font-semibold text-xs m-3 text-neutral-900 flex-1">Seto Putra Rahmanto</h1>
+                        <div class="bg-stone-600 inset-shadow-sm h-full w-[80px] flex justify-center items-center">
+                            <p class="text-stone-50  text-xl suara-kand">0</p>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-100 rounded-lg flex items-center justify-between overflow-hidden">
+                        <div class="h-[70px] w-[70px] bg-cyan-600 shadow-lg/20 rounded-full overflow-hidden">
+                            <img src="./assets/kand5.png" class="transform -translate-y-3 translate-x-1 scale-170 " srcset="">
+                        </div>
+                        <h1 class="font-semibold text-xs m-3 text-neutral-900 flex-1">Narendra Putra Sasongko</h1>
+                        <div class="bg-stone-600 inset-shadow-sm h-full w-[80px] flex justify-center items-center">
+                            <p class="text-stone-50  text-xl suara-kand">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-[200px] bg-blue-300 p-6 flex">
+                <div class="w-[260px] p-4 h-[120px] bg-stone-700 rounded-lg">
+                    <p class="text-xl font-semibold text-stone-50">Suara Sah:</p>
+                    <p id="sah" class="text-[40px] font-semibold text-green-400">0</p>
+                </div>
+                <div class="w-[260px] p-4 h-[120px] bg-stone-700 rounded-lg mr-6 ml-6">
+                    <p class="text-xl font-semibold text-stone-50">Suara Tidak Sah:</p>
+                    <p id="tidak-sah" class="text-[40px] font-semibold text-red-400">0</p>
+                </div>
+                <div class="w-[260px] p-4 h-[120px] bg-stone-700 rounded-lg">
+                    <p class="text-xl font-semibold text-stone-50">Total Pemilih:</p>
+                    <p id="pemilih" class="text-[40px] font-semibold text-stone-50">0</p>
+
+                </div>
+            </div>
+        </main>
+
+        <script src="scripts/chart.js"></script>
+        <script src="scripts/socket.io.min.js"></script>
+        <script>
+            const ctx = document.getElementById('myChart');
+            const socket = io('http://localhost:3000');
+            const suara = document.getElementsByClassName('suara-kand');
+            function $id(id) {return document.getElementById(id);}
+            socket.on('connection', () => {
+                alert('connected');
+            });
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Kandidat 1', 'Kandidat 2', 'Kandidat 3', 'Kandidat 4', 'Kandidat 5'],
+                    datasets: [{
+                        label: 'suara',
+                        data: [0, 0, 0, 0, 0],
+                        borderWidth: 2
+                    }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: false,
+                    maintainAspectRatio: true
+                }
+            });
+            // chart.data.datasets[0].data = [5, 5, 5];
+            socket.on('updateChart', (data) => {
+                data.forEach((val, index) => {
+                    suara[index].innerHTML = val;
+                });
+                chart.data.datasets[0].data = [data[0], data[1], data[2], data[3], data[4]];
+                chart.update();
+            });
+            socket.on('total suara', (data) => {
+                $id('sah').innerHTML = data.sah;
+                $id('tidak-sah').innerHTML = data.tidakSah;
+                $id('pemilih').innerHTML = data.pemilih;
+            });
+        </script>
+    </body>
+</html>
