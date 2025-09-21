@@ -11,63 +11,167 @@
             <!-- <h1>JELLY</h1> -->
         </nav>
         <main>
-            <div class="flex justify-center items-center h-screen">
-    <button id="ps1"  class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      kandidat 1
-    </button>
-    <button id="ps2"  class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      kandidat 2
-    </button>
-    <button  id="ps3" class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      kandidat 3
-    </button>
-    <button  id="ps4" class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      kandidat 4
-    </button>
-    <button  id="ps5" class="vote m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      kandidat 5
-    </button>
+            <div id="alert" class="hidden flex items-center justify-center absolute top-0 bottom-0 right-0 left-0 bg-black/20 backdrop-blur-xs z-40 ">
+                <div class="w-[350px] rounded-md bg-white p-5">
+                    <div id="alert-msg" class="text-center mt-10 mb-10 text-lg"></div>
+                    <div class="w-full flex justify-end">
+                        <button id="confirm-close" class="mr-3 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Batal
+                        </button>
+                        <button id="confirm-vote" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Konfirmasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center items-center">
 
-</div>
-    <script src="scripts/socket.io.min.js"></script>
+                <div class="justify-between m-3 h-[390px]  flex items-center flex-col overflow-hidden">
+                    <p class="suara-kand text-lg mt-3">0</p>
+                    <div class="w-[200px] rounded-full h-[200px] bg-teal-500 overflow-hidden">
+                        <img src="assets/kand1.png" class="transform -translate-y-7 translate-x-[5px] scale-200 " alt="" srcset="">
+                    </div>
+                    <p>Axl Fathir Ivory Warouw</p>
+                    <button id="ps1"  class="  vote bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Pilih Kandidat 1
+                    </button>
+                </div>
 
-<script>
-    const socket = io('https://smansekata.servei.net');
-    const kandidat = document.getElementsByClassName('kandidat');
-    function $id(id) {return document.getElementById(id);}
-    function $class(elem) {return document.getElementsByClassName(elem);}
-    function btnDisable(elem) {
-        Array.from($class(elem)).forEach(element => {
-            element.classList.remove('bg-blue-500')
-            element.classList.remove('hover:bg-blue-700')
-            element.classList.add('bg-blue-300')
-            element.disabled = true
-        });
-    }
-    function btnEnable(elem) {
-        Array.from($class(elem)).forEach(element => {
-            element.classList.add('bg-blue-500')
-            element.classList.add('hover:bg-blue-700')
-            element.classList.remove('bg-blue-300')
-            element.disabled = false
-        });
-    }
-    Array.from($class('vote')).forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            let data = [0,0,0,0,0]
-            data[index] = 1;
-            console.log(data);
-            btnDisable('vote');
-            socket.emit('vote', data);
-            setTimeout(() => {
-                btnEnable('vote');
-            }, 3000);
-        });
-    });
-    
-</script>
+                <div class="justify-between m-3 h-[390px] flex items-center flex-col overflow-hidden">
+                    <p class="suara-kand text-lg mt-3">0</p>
+                    <div class="w-[200px] h-[200px] rounded-full bg-teal-500 overflow-hidden">
+                        <img src="assets/kand2.png" class="transform -translate-y-11 translate-x-[6px] scale-[2.2] " alt="" srcset="">
+                    </div>
+                    <p>Lintang Pramoda<br>Wardani Pastika</p>
+                    <button id="ps2"  class="vote bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Pilih Kandidat 2
+                    </button>
+                </div>
 
+                <div class="justify-between m-3 h-[390px] flex items-center flex-col overflow-hidden">
+                    <p class="suara-kand text-lg mt-3">0</p>
+                    <div class="w-[200px] h-[200px] rounded-full bg-teal-500 overflow-hidden">
+                        <img src="assets/kand3.png" class="transform translate-y-5 translate-x-[6px] scale-150 " alt="" srcset="">
+                    </div>
+                    <p>Elisa Dwi Syafinah</p>
+                    <button  id="ps3" class="vote bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Pilih Kandidat 3
+                    </button>
+                </div>
+
+                <div class="justify-between m-3 h-[390px] flex items-center flex-col overflow-hidden">
+                    <p class="suara-kand text-lg mt-3">0</p>
+                    <div class="w-[200px] h-[200px] rounded-full bg-teal-500 overflow-hidden">
+                        <img src="assets/kand4.png" class="transform -translate-y-3 translate-x-[6px] scale-200 " alt="" srcset="">
+                    </div>
+                    <p>Seto Putra Rahmanto</p>
+                    <button  id="ps4" class="vote bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Pilih Kandidat 4
+                    </button>
+                </div>
+                
+                <div class="justify-between m-3 h-[390px] flex items-center flex-col overflow-hidden">
+                    <p class="suara-kand text-lg mt-3">0</p>
+                    <div class="w-[200px] h-[200px] rounded-full bg-teal-500 overflow-hidden">
+                        <img src="assets/kand5.png" class="transform -translate-y-7 translate-x-[6px] scale-[180%] " alt="" srcset="">
+                    </div>
+                    <p>Narendra Putra Sasongko</p>
+                    <button  id="ps5" class="vote bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Pilih Kandidat 5
+                    </button>
+                </div>
+                
+            </div>
+            
+            <div class="flex flex-col mt-10">
+                <div class=" pl-[160px] h-[90px] w-full flex flex-col">
+                    <div>
+                        <p>Jumlah Suara Sah: <span id="sah" class="text-xl text-green-600">0</span></p>
+                    </div>
+                    <div>
+                        <p>Jumlah Suara Tidak Sah: <span id="tidak-sah" class="text-xl text-red-600">0</span></p>
+                    </div>
+                    <div>
+                        <p>Jumlah Pemilih: <span id="pemilih" class="text-xl">0</span></p>
+                    </div>
+                </div>
+                <div class="w-full flex justify-center">
+                    <button id="invalid-btn" class="false-vote bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Suara Tidak Sah
+                    </button>
+                </div>
+            </div>
         </main>
+
+
+        <script src="scripts/socket.io.min.js"></script>
+        <script>
+            // const socket = io('http://localhost:3000/');
+            const socket = io('https://smansekata.serveo.net');
+            function $id(id) {return document.getElementById(id);}
+            function $class(elem) {return document.getElementsByClassName(elem);}
+            const kandidat = document.getElementsByClassName('kandidat');
+            const suara = $class('suara-kand');
+            let data = [0,0,0,0,0];
+            function btnDisable(elem) {
+                Array.from($class(elem)).forEach(element => {
+                    element.classList.remove('bg-blue-500')
+                    element.classList.remove('hover:bg-blue-700')
+                    element.classList.add('bg-blue-300')
+                    element.disabled = true
+                });
+            }
+            function btnEnable(elem) {
+                Array.from($class(elem)).forEach(element => {
+                    element.classList.add('bg-blue-500')
+                    element.classList.add('hover:bg-blue-700')
+                    element.classList.remove('bg-blue-300')
+                    element.disabled = false
+                });
+            }
+            $id('confirm-close').addEventListener('click', () => {
+                $id('alert').classList.add('hidden');
+                data = [0,0,0,0,0];
+            });
+            $id('confirm-vote').addEventListener('click', ()=>{
+                $id('confirm-vote').disabled = true;
+                $id('alert').classList.add('hidden');
+                socket.emit('vote', data);
+                console.log(data);
+                setTimeout(() => {
+                    $id('invalid-btn').disabled = false;
+                    $id('confirm-vote').disabled = false;
+                    btnEnable('vote');
+                }, 3000);
+                data = [0,0,0,0,0];
+            });
+
+            Array.from($class('vote')).forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    data[index] = 1;
+                    $id('alert-msg').innerHTML = `Pilih <b>Kandidat No.${(index+1)}`;
+                    $id('alert').classList.remove('hidden');
+                    btnDisable('vote');
+                });
+            });
+            $id('invalid-btn').addEventListener('click', () => {
+                $id('alert').classList.remove('hidden');
+                $id('alert-msg').innerHTML = "Suara <b>Tidak Sah?</b>";
+                $id('invalid-btn').disabled = true;
+                data = "invalid";
+            });
+            socket.on('updateChart', (data) => {
+                data.forEach((val, index) => {
+                    suara[index].innerHTML = val;
+                });
+            });
+            socket.on('total suara', (data) => {
+                $id('sah').innerHTML = data.sah;
+                $id('tidak-sah').innerHTML = data.tidakSah;
+                $id('pemilih').innerHTML = data.pemilih;
+            });
+        </script>
+
 
     </body>
 </html>
