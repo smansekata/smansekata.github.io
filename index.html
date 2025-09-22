@@ -152,6 +152,7 @@
                     $id('alert-msg').innerHTML = `Pilih <b>Kandidat No.${(index+1)}`;
                     $id('alert').classList.remove('hidden');
                     btnDisable('vote');
+                    $id('invalid-btn').disabled = true;
                 });
             });
             $id('invalid-btn').addEventListener('click', () => {
@@ -171,7 +172,7 @@
                 $id('pemilih').innerHTML = data.pemilih;
             });
         </script>
-
+    
 
     </body>
 </html>
